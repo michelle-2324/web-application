@@ -1,32 +1,74 @@
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card';
-import fs from 'fs';
-import path from 'path';
-
-const dataFilePath = path.join(process.cwd(), 'user-data.json');
-
-const getData = () => {
-  if (!fs.existsSync(dataFilePath)) {
-    return { Transactions: { Expenditure: [], Income: [] } };
-  }
-  const fileData = fs.readFileSync(dataFilePath, 'utf8');
-  return JSON.parse(fileData);
-};
+import Table from '../../components/ui/Table';
+import { useTranslation } from 'react-i18next';
 
 const MyRecords = () => {
-  const data = getData();
+  const { t } = useTranslation();
+  const [data, setData] = useState({ Transactions: { Expenditure: [], Income: [] } });
+
+  useEffect(() => {
+    fetch('/api/get-transactions-data')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => setData(data))
+      .catch(error => {
+        console.error('Failed to fetch data:', error);
+      });
+  }, []);
+
   const expenditureItems = data.Transactions.Expenditure;
+
+  const incomeItems = data.Transactions.Income;
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: t('form.itemName'),
+        accessor: 'itemName',
+      },
+      {
+        Header: t('form.quantity'),
+        accessor: 'quantity',
+      },
+      {
+        Header: t('form.currency'),
+        accessor: 'currency',
+      },
+      {
+        Header: t('form.amount'),
+        accessor: 'amount',
+      },
+      {
+        Header: t('form.category'),
+        accessor: 'category',
+      },
+      {
+        Header: t('form.date'),
+        accessor: 'date',
+      },
+    ],
+    [t]
+  );
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>My Records</CardTitle>
+        <CardTitle>{t('myRecords')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul>
-          {expenditureItems.map(item => (
-            <li key={item.id}>{item.itemName}</li>
-          ))}
-        </ul>
+        <div className="flex-col space-y-4">
+          <div>{t('form.expenditure')}</div>
+          <Table columns={columns} data={expenditureItems} />
+          <div>{t('form.income')}</div>
+          <Table columns={columns} data={incomeItems} />
+        </div>
       </CardContent>
     </Card>
   );

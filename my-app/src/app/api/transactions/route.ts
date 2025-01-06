@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const dataFilePath = path.join(process.cwd(), 'user-data.json');
+const dataFilePath = path.join(process.cwd(), 'src/data/user-data.json');
 
 interface TransactionData {
   itemName: string;
@@ -38,8 +38,8 @@ export async function POST(req: Request) {
   const userData = getUserData();
 
   const newTransaction = {
-    ...transactionData,
     id: `${type === 'Expenditure' ? 'E' : 'I'}${Date.now()}`,
+    ...transactionData,
   };
 
   if (type === 'Expenditure') {

@@ -1,25 +1,37 @@
-import { LucideIcon, House, TableProperties, ChartCandlestick } from 'lucide-react';
+import { LucideIcon, House, TableProperties, ChartCandlestick, Phone } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export interface SideBarItem { 
     page: string; 
     label: string; 
     icon: LucideIcon; 
 }
-    
-export const sideBarItems: SideBarItem[] = [ 
+
+export const SideBarItems = (): SideBarItem[] => {
+  const { t } = useTranslation();
+
+  const sideBarItems: SideBarItem[] = [ 
     {
         page:'/', 
-        label: 'Home',
+        label: t('home'),
         icon: House 
     }, 
     { 
         page: '/myRecords', 
-        label: 'My Records',
+        label: t('myRecords'),
         icon: TableProperties
     }, 
     { 
         page: '/myStocks', 
-        label: 'My Stocks',
+        label: t('myStocks'),
         icon: ChartCandlestick
+    },
+    {
+        page: '/contactUs',
+        label: t('contactUs'),
+        icon: Phone
     } 
-] 
+  ];
+
+  return sideBarItems;
+};

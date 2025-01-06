@@ -1,6 +1,9 @@
-import { sideBarItems, SideBarItem } from "./SideBarItem";
+import { SideBarItems, SideBarItem } from "./SideBarItem";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export function Sidebar() {
+  const sideBarItems = SideBarItems();
+
   return (
     <nav className="w-64 h-screen bg-gray-800 text-white p-4">
       <ul className="space-y-4">
@@ -11,6 +14,9 @@ export function Sidebar() {
           </li>
         ))}
       </ul>
+      <div className="mt-4">
+        <LanguageSwitcher />
+      </div>
     </nav>
   );
 }
