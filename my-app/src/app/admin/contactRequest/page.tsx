@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/Card';
-import Table  from '../../../components/ui/Table';
+import Table from '../../../components/ui/Table';
 
 const ContactRequest = () => {
   const [data, setData] = useState({ ContactRequests: [] });
@@ -12,7 +12,7 @@ const ContactRequest = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.json(); 
+        return response.json();
       })
       .then(data => setData(data))
       .catch(error => {
@@ -46,13 +46,37 @@ const ContactRequest = () => {
     []
   );
 
+  const onDelete = (row) => {
+    fetch('/api/delete-contact-request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: row.id }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          setData({ ContactRequests: data.ContactRequests });
+        }
+      })
+      .catch(error => {
+        console.error('Failed to delete data:', error);
+      });
+  };
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Contact Requests</CardTitle>
       </CardHeader>
       <CardContent>
-        <Table columns={columns} data={data.ContactRequests} />
+        <Table columns={columns} data={data.ContactRequests} clickAction={onDelete} buttonWord='Delete' />
       </CardContent>
     </Card>
   );

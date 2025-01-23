@@ -1,7 +1,14 @@
 import React from 'react';
 import { useTable, useSortBy } from 'react-table';
 
-const Table = ({ columns, data }) => {
+interface TableProps {
+  columns: any[];
+  data: any[];
+  clickAction?: (row: any) => void;
+  buttonWord?: string;
+}
+
+const Table: React.FC<TableProps> = ({ columns = [], data = [], clickAction, buttonWord = '' }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -25,14 +32,14 @@ const Table = ({ columns, data }) => {
                   const { key, ...rest } = column.getHeaderProps(column.getSortByToggleProps());
                   return (
                     <th key={key} {...rest} style={{ padding: '10px', cursor: 'pointer', textAlign: 'left' }}>
-                      {column.render('Header')}
-                      <span>
-                        {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                      </span>
-                    </th>
+                  {column.render('Header')}
+                  <span>
+                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                  </span>
+                </th>
                   );
                 })}
-              </tr>
+            </tr>
             );
           })}
         </thead>
@@ -41,13 +48,18 @@ const Table = ({ columns, data }) => {
             prepareRow(row);
             const { key, ...rest } = row.getRowProps();
             return (
-              <tr key={key} {...rest} style={{ borderBottom: '1px solid black' }}>
+              <tr key={key} {...rest} className="border-b border-black">
                 {row.cells.map(cell => {
                   const { key, ...rest } = cell.getCellProps();
                   return (
                     <td key={key} {...rest} style={{ padding: '10px', textAlign: 'left' }}>{cell.render('Cell')}</td>
                   );
                 })}
+                {clickAction && (
+                  <td>
+                    <button onClick={() => clickAction(row.original)}>{buttonWord}</button>
+                  </td>
+                )}
               </tr>
             );
           })}
