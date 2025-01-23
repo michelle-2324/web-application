@@ -12,11 +12,11 @@ interface ContactFormData {
   date: string;
 }
 
-interface UserData {
+interface FormData {
   ContactRequests: ContactFormData[];
 }
 
-const getUserData = (): UserData => {
+const getFormData = (): FormData => {
   if (!fs.existsSync(dataFilePath)) {
     return { ContactRequests: [] };
   }
@@ -24,23 +24,23 @@ const getUserData = (): UserData => {
   return JSON.parse(fileData);
 };
 
-const saveUserData = (data: UserData) => {
+const saveFormData = (data: FormData) => {
   fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
 };
 
 export async function POST(req: Request) {
   const body = await req.json();
   const { type, ...ContactFormData } = body;
-  const userData = getUserData();
+  const FormData = getFormData();
 
-  const newTransaction = {
+  const newRequest = {
     id: `C${Date.now()}`,
     ...ContactFormData,
   };
 
-  userData.ContactRequests.push(newTransaction);
+  FormData.ContactRequests.push(newRequest);
 
-  saveUserData(userData);
+  saveFormData(FormData);
 
   return NextResponse.json({ message: 'Request saved successfully' });
 }
