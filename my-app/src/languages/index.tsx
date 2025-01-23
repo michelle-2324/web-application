@@ -1,3 +1,4 @@
+import MyTransactions from '@/app/myTransactions/page';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
@@ -5,6 +6,7 @@ const resources = {
   en: {
     translation: {
       home: "Home",
+      myTransactions: "My Transactions",
       myRecords: "My Records",
       myStocks: "My Stocks",
       contactUs: "Contact Us",
@@ -29,6 +31,8 @@ const resources = {
         status: "Status",
         hold: "Hold",
         sold: "Sold",
+        currentPrice: 'Current Price',
+        netGainLoss: 'Net Gain/Loss',
         inputMessage: "Please input your message",
         submit: "Submit",
         reset: "Reset",
@@ -44,6 +48,7 @@ const resources = {
   zh: {
     translation: {
       home: "首頁",
+      myTransactions: "我的交易",
       myRecords: "我的記錄",
       myStocks: "我的股票",
       contactUs: "聯絡我們",
@@ -68,6 +73,8 @@ const resources = {
         status: "狀態",
         hold: "持有",
         sold: "已售",
+        currentPrice: '現價',
+        netGainLoss: '淨收益/虧損',
         inputMessage: "請輸入您的訊息",
         submit: "提交",
         reset: "重置",
