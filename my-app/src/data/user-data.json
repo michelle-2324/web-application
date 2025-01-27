@@ -1,0 +1,37 @@
+{
+  "Transactions": {
+    "Expenditure": [
+      {
+        "id": "E1737959011762",
+        "itemName": "Vegetables",
+        "quantity": 3,
+        "currency": "HKD",
+        "amount": 11,
+        "category": "",
+        "date": "2025-01-27T06:21:59.800Z"
+      }
+    ],
+    "Income": [
+      {
+        "id": "I1737959013575",
+        "itemName": "Salary",
+        "quantity": 1,
+        "currency": "HKD",
+        "amount": 10000,
+        "category": "",
+        "date": "2025-01-27T06:21:59.830Z"
+      }
+    ]
+  },
+  "Stocks": [
+    {
+      "id": "S1737959127967",
+      "stockSymbol": "AAPL",
+      "quantity": 10,
+      "currency": "USD",
+      "price": 225,
+      "date": "2024-11-15T06:24:11.000Z",
+      "status": "Hold"
+    }
+  ]
+}
