@@ -51,7 +51,7 @@ export function StockForm({ onSubmit }: StockFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)} className="space-y-4">
       <FormTitle className='text-black-500 !text-left'>
-        {t('form.inputStockInfo')}
+        {t('inputStockInfo')}
       </FormTitle>
       <div>
         <FormLabel>{t('form.stockSymbol')}:</FormLabel>
@@ -82,7 +82,7 @@ export function StockForm({ onSubmit }: StockFormProps) {
         {errors.currency && <p className="text-red-500">{errors.currency.message}</p>}
       </div>
       <div>
-        <FormLabel>{t('form.price')}:</FormLabel>
+        <FormLabel>{t('form.purchasePrice')}:</FormLabel>
         <FormInput
           type="number"
           {...register("price", { valueAsNumber: true })}

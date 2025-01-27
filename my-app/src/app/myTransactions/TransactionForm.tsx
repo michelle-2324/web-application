@@ -88,7 +88,7 @@ export function TransactionForm({ type, onSubmit }: TransactionFormProps) {
         {errors.currency && <p className="text-red-500">{errors.currency.message}</p>}
       </div>
       <div>
-        <FormLabel>{t('form.amount')}:</FormLabel>
+        <FormLabel>{t('form.price')}:</FormLabel>
         <FormInput
           type="number"
           {...register("amount", { valueAsNumber: true })}

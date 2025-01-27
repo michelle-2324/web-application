@@ -61,7 +61,7 @@ export default function MyStocks() {
         accessor: 'currency',
       },
       {
-        Header: t('form.price'),
+        Header: t('form.purchasePrice'),
         accessor: 'price',
       },
       {

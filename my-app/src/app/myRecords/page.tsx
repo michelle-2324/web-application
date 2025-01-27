@@ -42,7 +42,7 @@ const MyRecords = () => {
         accessor: 'currency',
       },
       {
-        Header: t('form.amount'),
+        Header: t('form.price'),
         accessor: 'amount',
       },
       {
@@ -64,10 +64,10 @@ const MyRecords = () => {
       </CardHeader>
       <CardContent>
         <div className="flex-col space-y-4">
-          <div>{t('form.expenditure')}</div>
-          <Table columns={columns} data={expenditureItems} />
-          <div>{t('form.income')}</div>
-          <Table columns={columns} data={incomeItems} />
+          <div className="text-xl font-bold text-red-500">{t('form.expenditure')}</div>
+          <Table columns={columns} data={expenditureItems} className="border-red-200 rounded-lg border-4" />
+          <div className="text-xl font-bold text-green-500">{t('form.income')}</div>
+          <Table columns={columns} data={incomeItems} className="border-green-200 rounded-lg border-4" />
         </div>
       </CardContent>
     </Card>

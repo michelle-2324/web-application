@@ -6,9 +6,10 @@ interface TableProps {
   data: any[];
   clickAction?: (row: any) => void;
   buttonWord?: string;
+  className?: string;
 }
 
-const Table: React.FC<TableProps> = ({ columns = [], data = [], clickAction, buttonWord = '' }) => {
+const Table: React.FC<TableProps> = ({ columns = [], data = [], clickAction, buttonWord = '', className='' }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -21,8 +22,8 @@ const Table: React.FC<TableProps> = ({ columns = [], data = [], clickAction, but
   }, useSortBy);
 
   return (
-    <div style={{ overflowX: 'auto' }}>
-      <table {...getTableProps()} style={{ border: '1px solid black', width: '100%', borderCollapse: 'collapse' }}>
+    <div style={{ overflowX: 'auto' }} className={`${className}`}>
+      <table {...getTableProps()} className={`border-collapse w-full ${className}`}>
         <thead>
           {headerGroups.map(headerGroup => {
             const { key, ...rest } = headerGroup.getHeaderGroupProps();
